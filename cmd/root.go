@@ -14,6 +14,7 @@ var rootCmd = &cobra.Command{
 	// Short: "go-dump is a tool to parse OSPF or SNMP packets for troubleshooting",
 }
 
+// Execute init action point for app
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
