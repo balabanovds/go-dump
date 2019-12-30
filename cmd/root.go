@@ -7,7 +7,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var hostsFile string
+var (
+	customer  string
+	hostsFile string
+)
 
 var rootCmd = &cobra.Command{
 	Use: "go-dump",
@@ -24,6 +27,7 @@ func Execute() {
 }
 
 func init() {
+	rootCmd.PersistentFlags().StringVar(&customer, "customer", "undefined", "Customer name")
 	rootCmd.PersistentFlags().StringVar(&hostsFile, "hosts", "", "Hosts file in format: IP NAME [TYPE]")
 	rootCmd.MarkPersistentFlagRequired("hosts")
 	rootCmd.AddCommand(ospfCmd, snmpCmd)

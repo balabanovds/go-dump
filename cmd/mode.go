@@ -3,6 +3,8 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/balabanovds/go-dump/internal/ospf"
+
 	"github.com/spf13/cobra"
 )
 
@@ -11,7 +13,7 @@ var ospfFileCmd = &cobra.Command{
 	Short: "Parse local pcap files for OSPF packets (several packets will be merged)",
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("OSPF: %#v\n", args)
+		ospf.RunOffline(hostsFile, args...)
 	},
 }
 
@@ -20,6 +22,6 @@ var snmpFileCmd = &cobra.Command{
 	Short: "Parse local pcap files for SNMP packets (several packets will be merged)",
 	Args:  cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("SNMP: %#v\n", args)
+		fmt.Println("This option is not implemented yet")
 	},
 }
