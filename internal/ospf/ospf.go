@@ -6,7 +6,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/balabanovds/go-dump/util"
+	"github.com/balabanovds/go-dump/internal/util"
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
 )
@@ -30,8 +30,7 @@ type lsaCompatible interface {
 	Dump() string
 }
 
-// HandlePacket OSPF
-func HandlePacket(p gopacket.Packet) {
+func handlePacket(p gopacket.Packet) {
 
 	fmt.Println(p.Dump())
 
