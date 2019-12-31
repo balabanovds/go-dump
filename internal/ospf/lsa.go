@@ -3,6 +3,8 @@ package ospf
 import (
 	"encoding/binary"
 	"net"
+
+	u "github.com/balabanovds/go-dump/internal/util"
 )
 
 const lsaHeaderLength = 20
@@ -43,14 +45,14 @@ type LSA struct {
 
 func parseLSA(data []byte) LSA {
 	var lsa LSA
-	var o offset
-	lsa.LSAge = binary.BigEndian.Uint16(shiftN(data, &o, 2))
-	lsa.Options = uint8(shiftOne(data, &o))
-	lsa.LSType = LSType(shiftOne(data, &o))
-	lsa.LinkStateID = net.IP(shiftN(data, &o, 4))
-	lsa.AdvRouter = net.IP(shiftN(data, &o, 4))
-	lsa.SeqNumber = binary.BigEndian.Uint32(shiftN(data, &o, 4))
-	lsa.Checksum = binary.BigEndian.Uint16(shiftN(data, &o, 2))
-	lsa.Length = binary.BigEndian.Uint16(shiftN(data, &o, 2))
+	var o u.Offset
+	lsa.LSAge = binary.BigEndian.Uint16(u.ShiftN(data, &o, 2))
+	lsa.Options = uint8(u.ShiftOne(data, &o))
+	lsa.LSType = LSType(u.ShiftOne(data, &o))
+	lsa.LinkStateID = net.IP(u.ShiftN(data, &o, 4))
+	lsa.AdvRouter = net.IP(u.ShiftN(data, &o, 4))
+	lsa.SeqNumber = binary.BigEndian.Uint32(u.ShiftN(data, &o, 4))
+	lsa.Checksum = binary.BigEndian.Uint16(u.ShiftN(data, &o, 2))
+	lsa.Length = binary.BigEndian.Uint16(u.ShiftN(data, &o, 2))
 	return lsa
 }

@@ -2,6 +2,8 @@ package ospf
 
 import (
 	"encoding/binary"
+
+	u "github.com/balabanovds/go-dump/internal/util"
 )
 
 // LSUpdate packet struct
@@ -16,13 +18,13 @@ type offset uint32
 func parseLSUpdatePacket(data []byte) LSUpdate {
 	var ls LSUpdate
 
-	var off offset
+	var off u.Offset
 
-	ls.NumOfLSAa = binary.BigEndian.Uint32(shiftN(data, &off, 4))
+	ls.NumOfLSAa = binary.BigEndian.Uint32(u.ShiftN(data, &off, 4))
 
 	for i := 0; i < int(ls.NumOfLSAa); i++ {
 		length := binary.BigEndian.Uint16(data[off+18 : off+20])
-		end := off + offset(length)
+		end := off + u.Offset(length)
 		lsa := parseLSA(data[off:end])
 
 		switch lsa.LSType {
@@ -40,16 +42,4 @@ func parseLSUpdatePacket(data []byte) LSUpdate {
 	}
 
 	return ls
-}
-
-func shiftOne(data []byte, off *offset) (b byte) {
-	b = data[*off]
-	*off++
-	return
-}
-
-func shiftN(data []byte, off *offset, n int) (b []byte) {
-	b = data[*off : *off+offset(n)]
-	*off += offset(n)
-	return
 }

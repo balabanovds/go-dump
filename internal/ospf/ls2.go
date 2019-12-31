@@ -2,6 +2,8 @@ package ospf
 
 import (
 	"net"
+
+	u "github.com/balabanovds/go-dump/internal/util"
 )
 
 // LS2 represents OSPF Network-LSA struct
@@ -13,15 +15,15 @@ type LS2 struct {
 
 func parseLS2(data []byte) LS2 {
 	var l LS2
-	var o offset
+	var o u.Offset
 
-	l.Netmask = net.IP(shiftN(data, &o, 4))
+	l.Netmask = net.IP(u.ShiftN(data, &o, 4))
 
 	for {
 		if len(data) == int(o) {
 			break
 		}
-		l.AttachedRouters = append(l.AttachedRouters, net.IP(shiftN(data, &o, 4)))
+		l.AttachedRouters = append(l.AttachedRouters, net.IP(u.ShiftN(data, &o, 4)))
 	}
 
 	return l
