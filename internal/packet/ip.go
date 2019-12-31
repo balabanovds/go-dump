@@ -2,17 +2,11 @@ package packet
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/balabanovds/go-dump/internal/ospf"
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
 )
-
-type Packet struct {
-	Length    int
-	Timestamp time.Time
-}
 
 func handleIPPacket(l gopacket.Layer, p Packet) error {
 

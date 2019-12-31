@@ -3,11 +3,18 @@ package packet
 import (
 	"fmt"
 	"log"
+	"time"
 
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
 	pcap "github.com/google/gopacket/pcap"
 )
+
+// Packet base packet struct
+type Packet struct {
+	Length    int
+	Timestamp time.Time
+}
 
 // RunOffline fires up OSPF parsing
 func RunOffline(hostFile string, files ...string) {
@@ -32,6 +39,10 @@ func runOne(file string) error {
 	return nil
 }
 func handlePacket(p gopacket.Packet) error {
+
+	if p.Metadata().Truncated {
+		return fmt.Errorf("Truncated packet: @%v", p.Metadata().Timestamp)
+	}
 
 	var pck Packet
 
