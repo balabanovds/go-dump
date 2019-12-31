@@ -1,26 +1,25 @@
 package ospf
 
-import (
-	"github.com/google/gopacket/layers"
-)
 
-const ospfv2HeaderLen = 24
 
-type OspfPacket struct {
+// Packet - full OSPF packet
+type Packet struct {
 	Header
-	LsaNum  int
-	Content layers.LSUpdate
-}
-
-type lsaCompatible interface {
-	Dump() string
+	LsaNum int
+	LSUpdate
 }
 
 // ParsePacket parsing OSPF data payload
-func ParsePacket(data []byte) (OspfPacket, error) {
-	var p OspfPacket
+func ParsePacket(data []byte) (Packet, error) {
+	var p Packet
 
 	p.Header = parseHeader(data[:ospfv2HeaderLen])
+
+	//TODO add parsing others types
+	switch p.Header.Type {
+	case lsUpdate:
+		p.LSUpdate = parseLSUpdatePacket(data[ospfv2HeaderLen:])
+	}
 
 	// ospfLayer := p.Layer(layers.LayerTypeOSPF)
 	// if ospfLayer != nil {

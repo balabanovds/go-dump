@@ -5,6 +5,7 @@ import (
 	"net"
 )
 
+// Version - OSPF version
 type Version uint16
 
 const (
@@ -12,6 +13,9 @@ const (
 	v3
 )
 
+const ospfv2HeaderLen = 24
+
+// PacketType - OSPF packet type
 type PacketType uint8
 
 const (
@@ -22,6 +26,7 @@ const (
 	lsAck
 )
 
+// Header - OSPF header
 type Header struct {
 	Version  Version
 	Type     PacketType
