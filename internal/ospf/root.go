@@ -1,6 +1,8 @@
 package ospf
 
 import (
+	"log"
+
 	"github.com/google/gopacket"
 	pcap "github.com/google/gopacket/pcap"
 )
@@ -20,7 +22,10 @@ func runOne(file string) error {
 
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
 	for packet := range packetSource.Packets() {
-		handlePacket(packet)
+		err := handlePacket(packet)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 	return nil
 }

@@ -2,7 +2,6 @@ package ospf
 
 import (
 	"fmt"
-	"log"
 	"net"
 	"time"
 
@@ -11,8 +10,10 @@ import (
 	"github.com/google/gopacket/layers"
 )
 
+const ospfv2HeaderLen = 24
+
 type packet struct {
-	length    int
+	fullLen   int
 	timestamp time.Time
 	data      []byte
 }
@@ -30,14 +31,29 @@ type lsaCompatible interface {
 	Dump() string
 }
 
-func handlePacket(p gopacket.Packet) {
+func handlePacket(p gopacket.Packet) error {
 
-	fmt.Println(p.Dump())
+	// fmt.Println(p.Dump())
 
 	var pck ospfPacket
-	pck.packet.length = p.Metadata().Length
+	pck.fullLen = p.Metadata().Length
 	pck.timestamp = p.Metadata().Timestamp
 	pck.packet.data = p.Data()
+
+	ipLayer := p.Layer(layers.LayerTypeIPv4)
+	if ipLayer != nil {
+		fmt.Println("IPv4 Layer detected")
+	}
+
+	ip, ok := ipLayer.(*layers.IPv4)
+	if !ok {
+		return fmt.Errorf("Not an IPv4 packet TIMESTAMP: %v", pck.timestamp)
+	}
+
+	if ip.Protocol == layers.IPProtocolOSPF {
+		fmt.Println("OSPF Layer detected")
+		parseHeader(ip.Payload[:ospfv2HeaderLen])
+	}
 
 	ospfLayer := p.Layer(layers.LayerTypeOSPF)
 	if ospfLayer != nil {
@@ -45,14 +61,19 @@ func handlePacket(p gopacket.Packet) {
 		ospf, ok := ospfLayer.(*layers.OSPFv2)
 
 		if !ok {
-			log.Printf("Failed to parse OSPFv2 packet")
-			return
+			return fmt.Errorf("Failed to parse OSPF at packet TIMESTAMP: %v", pck.timestamp)
 		}
 
 		pck.routerID = util.Int2Ip(ospf.RouterID)
 		pck.area = util.Int2Ip(ospf.AreaID)
 		pck.length = int(ospf.PacketLength)
 
-		fmt.Printf("%v\n", util.Int2Ip(ospf.RouterID))
+		content := ospf.Content.(layers.LSUpdate)
+
+		fmt.Printf("%v\n", content.NumOfLSAs)
+		start := pck.fullLen - pck.length + ospfv2HeaderLen
+		fmt.Printf("%v\n", p.Data()[start:])
 	}
+
+	return nil
 }
