@@ -8,6 +8,7 @@ import (
 
 const ls1LinkLength = 12
 
+// LS1 represents OSPF Router-LSA struct
 type LS1 struct {
 	LSA
 	LS1Flags
@@ -15,12 +16,14 @@ type LS1 struct {
 	Links      []LS1Link
 }
 
+// LS1Flags represent flags of Router-LSA packet
 type LS1Flags struct {
 	VirtualLink bool
 	ASBR        bool
 	ABR         bool
 }
 
+// LS1Link is one of link types
 type LS1Link struct {
 	LinkID     net.IP
 	Data       net.IP
@@ -29,13 +32,22 @@ type LS1Link struct {
 	Metric     uint16
 }
 
+// LS1LinkType is a Router-LSA link of type:
+// - PTP     where LinkID == Neighbor router ID,
+// - Transit where LinkID == IP address of DR,
+// - Stub    where LinkID == IP Network,
+// - Virtual where LinkID == Neighbor router ID
 type LS1LinkType uint16
 
 const (
-	PTP     LS1LinkType = iota + 1 // LinkID == Neighbor router ID
-	Transit                        // LinkID == IP address of DR
-	Stub                           // LinkID == IP Network
-	Virtual                        // LinkID == Neighbor router ID
+	// PTP - point to point link type
+	PTP LS1LinkType = iota + 1
+	// Transit link type (broadcast)
+	Transit
+	// Stub - connection to stub network
+	Stub
+	// Virtual link
+	Virtual
 )
 
 func parseLS1(data []byte) LS1 {

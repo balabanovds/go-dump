@@ -7,19 +7,29 @@ import (
 
 const lsaHeaderLength = 20
 
+// LSType ..
 type LSType uint8
 
 const (
+	// LSTypeRouter LSA1
 	LSTypeRouter LSType = iota + 1
+	// LSTypeNetwork LSA2
 	LSTypeNetwork
+	// LSTypeSummary LSA3
 	LSTypeSummary
+	// LSTypeSummaryASBR LSA4
 	LSTypeSummaryASBR
+	// LSTypeASExternal LSA5
 	LSTypeASExternal
+	// LSTypeMulticast LSA6
 	LSTypeMulticast
+	// LSTypeNSSA LSA7
 	LSTypeNSSA
+	// LSTypeExtAttrBGP LSA8
 	LSTypeExtAttrBGP
 )
 
+// LSA is a base LSA struct
 type LSA struct {
 	LSAge   uint16
 	Options uint8

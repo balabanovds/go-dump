@@ -28,8 +28,12 @@ func parseLSUpdatePacket(data []byte) LSUpdate {
 		switch lsa.LSType {
 		case LSTypeRouter:
 			ls1 := parseLS1(data[off+lsaHeaderLength : end])
+			ls1.LSA = lsa
 			ls.LS1Packets = append(ls.LS1Packets, ls1)
 		case LSTypeNetwork:
+			ls2 := parseLS2(data[off+lsaHeaderLength : end])
+			ls2.LSA = lsa
+			ls.LS2Packets = append(ls.LS2Packets, ls2)
 		}
 
 		off = end
