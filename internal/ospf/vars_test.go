@@ -2,21 +2,32 @@ package ospf
 
 import (
 	"net"
+
+	"github.com/balabanovds/go-dump/internal/util"
 )
 
 const (
-	p1OspfHex     = "020400940afc279400000000afe60000000000000000000000000001000b02010afc27120afc27128001c2ae4fd50078020000080afc2712ffffffff0300000a0a6406fe0a6406640200000a0afc23010afc27120100000a0afc2301ffffffff0300000a0afc27010afc27120100000a0afc2701ffffffff0300000a0afc27110afc27120100000a0afc2711ffffffff0300000a"
-	p1LSUpdateHex = "00000001000b02010afc27120afc27128001c2ae4fd50078020000080afc2712ffffffff0300000a0a6406fe0a6406640200000a0afc23010afc27120100000a0afc2301ffffffff0300000a0afc27010afc27120100000a0afc2701ffffffff0300000a0afc27110afc27120100000a0afc2711ffffffff0300000a"
-	p1HeaderHex   = "020400940afc279400000000afe600000000000000000000"
-	p1LsaHex      = "000b02010afc27120afc27128001c2ae4fd50078020000080afc2712ffffffff0300000a0a6406fe0a6406640200000a0afc23010afc27120100000a0afc2301ffffffff0300000a0afc27010afc27120100000a0afc2701ffffffff0300000a0afc27110afc27120100000a0afc2711ffffffff0300000a"
+	p1OspfHex = "020400940afc279400000000afe60000000000000000000000000001000b02010afc27120afc27128001c2ae4fd50078020000080afc2712ffffffff0300000a0a6406fe0a6406640200000a0afc23010afc27120100000a0afc2301ffffffff0300000a0afc27010afc27120100000a0afc2701ffffffff0300000a0afc27110afc27120100000a0afc2711ffffffff0300000a"
 
-	p2OspfHex     = "020400940afc279400000000820a0000000000000000000000000002000a22010aff00170aff00178001d20c49ac0054020000050afe0108fffffffc030000320aff000c0afe0217010000010aff000b0afe0217010000010afe0217ffffffff030000000a6417fe0a6417fe02000001000a22020a6417fe0aff00178000707b5cf90024ffffff000aff00170afa00010afc1d04"
-	p2LSUpdateHex = "00000002000a22010aff00170aff00178001d20c49ac0054020000050afe0108fffffffc030000320aff000c0afe0217010000010aff000b0afe0217010000010afe0217ffffffff030000000a6417fe0a6417fe02000001000a22020a6417fe0aff00178000707b5cf90024ffffff000aff00170afa00010afc1d04"
-	p21LsaHex     = "000a22010aff00170aff00178001d20c49ac0054020000050afe0108fffffffc030000320aff000c0afe0217010000010aff000b0afe0217010000010afe0217ffffffff030000000a6417fe0a6417fe02000001"
-	p22LsaHex     = "000a22020a6417fe0aff00178000707b5cf90024ffffff000aff00170afa00010afc1d04"
+	p2OspfHex = "020400940afc279400000000820a0000000000000000000000000002000a22010aff00170aff00178001d20c49ac0054020000050afe0108fffffffc030000320aff000c0afe0217010000010aff000b0afe0217010000010afe0217ffffffff030000000a6417fe0a6417fe02000001000a22020a6417fe0aff00178000707b5cf90024ffffff000aff00170afa00010afc1d04"
 )
 
 var (
+	p1HeaderData   []byte
+	p1LSUpdateData []byte
+	p2LSUpdateData []byte
+	p1LSAData      []byte
+	p21LSAData     []byte
+	p22LSAData     []byte
+	p1LSData       []byte
+	p21LSData      []byte
+	p22LSData      []byte
+
+	p1LsaLen  uint16 = 120
+	p21LsaLen uint16 = 84
+	p22LsaLen uint16 = 36
+	numLsaLen        = 4
+
 	p1Ospf = Packet{
 		Header:   p1Header,
 		LSUpdate: p1LSUpdate,
@@ -53,7 +64,7 @@ var (
 		LinkStateID: net.ParseIP("10.252.39.18").To4(),
 		AdvRouter:   net.ParseIP("10.252.39.18").To4(),
 		SeqNumber:   2147599022,
-		Length:      120,
+		Length:      p1LsaLen,
 		Checksum:    20437,
 	}
 
@@ -64,7 +75,7 @@ var (
 		LinkStateID: net.ParseIP("10.255.0.23").To4(),
 		AdvRouter:   net.ParseIP("10.255.0.23").To4(),
 		SeqNumber:   0x8001d20c,
-		Length:      84,
+		Length:      p21LsaLen,
 		Checksum:    0x000049ac,
 	}
 
@@ -75,7 +86,7 @@ var (
 		LinkStateID: net.ParseIP("10.100.23.254").To4(),
 		AdvRouter:   net.ParseIP("10.255.0.23").To4(),
 		SeqNumber:   0x8000707b,
-		Length:      36,
+		Length:      p22LsaLen,
 		Checksum:    0x00005cf9,
 	}
 
@@ -204,3 +215,17 @@ var (
 		},
 	}
 )
+
+func init() {
+	p1HeaderData = util.HexString2Bytes(p1OspfHex)[:ospfv2HeaderLen]
+	p1LSUpdateData = util.HexString2Bytes(p1OspfHex)[ospfv2HeaderLen:]
+	p2LSUpdateData = util.HexString2Bytes(p2OspfHex)[ospfv2HeaderLen:]
+
+	p1LSAData = util.HexString2Bytes(p1OspfHex)[ospfv2HeaderLen+numLsaLen:]
+	p21LSAData = util.HexString2Bytes(p2OspfHex)[ospfv2HeaderLen+numLsaLen:]
+	p22LSAData = util.HexString2Bytes(p2OspfHex)[ospfv2HeaderLen+numLsaLen+int(p21LsaLen):]
+
+	p1LSData = util.HexString2Bytes(p1OspfHex)[ospfv2HeaderLen+numLsaLen+lsaHeaderLength:]
+	p21LSData = util.HexString2Bytes(p2OspfHex)[ospfv2HeaderLen+numLsaLen+lsaHeaderLength:]
+	p22LSData = util.HexString2Bytes(p2OspfHex)[ospfv2HeaderLen+numLsaLen+lsaHeaderLength+int(p21LsaLen):]
+}

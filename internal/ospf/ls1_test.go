@@ -3,28 +3,25 @@ package ospf
 import (
 	"reflect"
 	"testing"
-
-	"github.com/balabanovds/go-dump/internal/util"
 )
 
 func TestParseLS1(t *testing.T) {
 	var tests = []struct {
-		hex string
-		exp LS1
+		data []byte
+		exp  LS1
 	}{
 		{
-			hex: p1LsaHex,
-			exp: p1LS1,
+			data: p1LSData,
+			exp:  p1LS1,
 		},
 		{
-			hex: p21LsaHex,
-			exp: p21LS1,
+			data: p21LSData,
+			exp:  p21LS1,
 		},
 	}
 
 	for _, c := range tests {
-		data := util.HexString2Bytes(c.hex)[lsaHeaderLength:]
-		got := parseLS1(data)
+		got := parseLS1(c.data)
 
 		// as we test only LS1 link we have to nil LSA
 		c.exp.LSA = LSA{}
