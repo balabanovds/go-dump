@@ -2,6 +2,8 @@ package util
 
 import (
 	"encoding/binary"
+	"encoding/hex"
+	"log"
 	"net"
 )
 
@@ -28,3 +30,14 @@ func Int2Ip(i uint32) net.IP {
 	binary.BigEndian.PutUint32(ip, i)
 	return ip
 }
+
+// HexString2Bytes converts hex stream as string to byte slice, and panics if error
+func HexString2Bytes(s string) []byte {
+	decoded, err := hex.DecodeString(s)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return decoded
+}
+

@@ -3,8 +3,8 @@ package ospf
 // Packet - full OSPF packet
 type Packet struct {
 	Header
-	LsaNum int
 	LSUpdate
+	// TODO: add other types here, now actual only LS-Update
 }
 
 // ParsePacket parsing OSPF data payload

@@ -1,0 +1,144 @@
+No.     Time                          Source                Destination           Protocol Length Info
+      1 2022-08-19 01:10:32,937807    10.252.39.148         224.0.0.5             OSPF     184    LS Update
+
+Frame 1: 184 bytes on wire (1472 bits), 184 bytes captured (1472 bits)
+    Encapsulation type: Linux cooked-mode capture (25)
+    Arrival Time: Aug 19, 2022 01:10:32.937807000 MSK
+    [Time shift for this packet: 0.000000000 seconds]
+    Epoch Time: 1660860632.937807000 seconds
+    [Time delta from previous captured frame: 0.000000000 seconds]
+    [Time delta from previous displayed frame: 0.000000000 seconds]
+    [Time since reference or first frame: 0.000000000 seconds]
+    Frame Number: 1
+    Frame Length: 184 bytes (1472 bits)
+    Capture Length: 184 bytes (1472 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: sll:ethertype:ip:ospf]
+    [Coloring Rule Name: OSPF State Change]
+    [Coloring Rule String: ospf.msg != 1]
+Linux cooked capture
+    Packet type: Unicast to us (0)
+    Link-layer address type: 512
+    Link-layer address length: 0
+    Unused: 483eadaa0dbf340d
+    Protocol: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 10.252.39.148, Dst: 224.0.0.5
+    0100 .... = Version: 4
+    .... 0101 = Header Length: 20 bytes (5)
+    Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+        1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+        .... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+    Total Length: 168
+    Identification: 0xfcb3 (64691)
+    Flags: 0x0000
+        0... .... .... .... = Reserved bit: Not set
+        .0.. .... .... .... = Don't fragment: Not set
+        ..0. .... .... .... = More fragments: Not set
+        ...0 0000 0000 0000 = Fragment offset: 0
+    Time to live: 1
+    Protocol: OSPF IGP (89)
+    Header checksum: 0xa8f4 [validation disabled]
+    [Header checksum status: Unverified]
+    Source: 10.252.39.148
+    Destination: 224.0.0.5
+Open Shortest Path First
+    OSPF Header
+        Version: 2
+        Message Type: LS Update (4)
+        Packet Length: 148
+        Source OSPF Router: 10.252.39.148
+        Area ID: 0.0.0.0 (Backbone)
+        Checksum: 0x820a [correct]
+        Auth Type: Null (0)
+        Auth Data (none): 0000000000000000
+    LS Update Packet
+        Number of LSAs: 2
+        LSA-type 1 (Router-LSA), len 84
+            .000 0000 0000 1010 = LS Age (seconds): 10
+            0... .... .... .... = Do Not Age Flag: 0
+            Options: 0x22, (DC) Demand Circuits, (E) External Routing
+                0... .... = DN: Not set
+                .0.. .... = O: Not set
+                ..1. .... = (DC) Demand Circuits: Supported
+                ...0 .... = (L) LLS Data block: Not Present
+                .... 0... = (N) NSSA: Not supported
+                .... .0.. = (MC) Multicast: Not capable
+                .... ..1. = (E) External Routing: Capable
+                .... ...0 = (MT) Multi-Topology Routing: No
+            LS Type: Router-LSA (1)
+            Link State ID: 10.255.0.23
+            Advertising Router: 10.255.0.23
+            Sequence Number: 0x8001d20c
+            Checksum: 0x49ac
+            Length: 84
+            Flags: 0x02, (E) AS boundary router
+                .... .0.. = (V) Virtual link endpoint: No
+                .... ..1. = (E) AS boundary router: Yes
+                .... ...0 = (B) Area border router: No
+            Number of Links: 5
+            Type: Stub     ID: 10.254.1.8      Data: 255.255.255.252 Metric: 50
+                Link ID: 10.254.1.8 - IP network/subnet number
+                Link Data: 255.255.255.252
+                Link Type: 3 - Connection to a stub network
+                Number of Metrics: 0 - TOS
+                0 Metric: 50
+            Type: PTP      ID: 10.255.0.12     Data: 10.254.2.23     Metric: 1
+                Link ID: 10.255.0.12 - Neighboring router's Router ID
+                Link Data: 10.254.2.23
+                Link Type: 1 - Point-to-point connection to another router
+                Number of Metrics: 0 - TOS
+                0 Metric: 1
+            Type: PTP      ID: 10.255.0.11     Data: 10.254.2.23     Metric: 1
+                Link ID: 10.255.0.11 - Neighboring router's Router ID
+                Link Data: 10.254.2.23
+                Link Type: 1 - Point-to-point connection to another router
+                Number of Metrics: 0 - TOS
+                0 Metric: 1
+            Type: Stub     ID: 10.254.2.23     Data: 255.255.255.255 Metric: 0
+                Link ID: 10.254.2.23 - IP network/subnet number
+                Link Data: 255.255.255.255
+                Link Type: 3 - Connection to a stub network
+                Number of Metrics: 0 - TOS
+                0 Metric: 0
+            Type: Transit  ID: 10.100.23.254   Data: 10.100.23.254   Metric: 1
+                Link ID: 10.100.23.254 - IP address of Designated Router
+                Link Data: 10.100.23.254
+                Link Type: 2 - Connection to a transit network
+                Number of Metrics: 0 - TOS
+                0 Metric: 1
+        LSA-type 2 (Network-LSA), len 36
+            .000 0000 0000 1010 = LS Age (seconds): 10
+            0... .... .... .... = Do Not Age Flag: 0
+            Options: 0x22, (DC) Demand Circuits, (E) External Routing
+                0... .... = DN: Not set
+                .0.. .... = O: Not set
+                ..1. .... = (DC) Demand Circuits: Supported
+                ...0 .... = (L) LLS Data block: Not Present
+                .... 0... = (N) NSSA: Not supported
+                .... .0.. = (MC) Multicast: Not capable
+                .... ..1. = (E) External Routing: Capable
+                .... ...0 = (MT) Multi-Topology Routing: No
+            LS Type: Network-LSA (2)
+            Link State ID: 10.100.23.254
+            Advertising Router: 10.255.0.23
+            Sequence Number: 0x8000707b
+            Checksum: 0x5cf9
+            Length: 36
+            Netmask: 255.255.255.0
+            Attached Router: 10.255.0.23
+            Attached Router: 10.250.0.1
+            Attached Router: 10.252.29.4
+
+0000  00 00 02 00 00 00 48 3e ad aa 0d bf 34 0d 08 00   ......H>....4...
+0010  45 c0 00 a8 fc b3 00 00 01 59 a8 f4 0a fc 27 94   E........Y....'.
+0020  e0 00 00 05 02 04 00 94 0a fc 27 94 00 00 00 00   ..........'.....
+0030  82 0a 00 00 00 00 00 00 00 00 00 00 00 00 00 02   ................
+0040  00 0a 22 01 0a ff 00 17 0a ff 00 17 80 01 d2 0c   ..".............
+0050  49 ac 00 54 02 00 00 05 0a fe 01 08 ff ff ff fc   I..T............
+0060  03 00 00 32 0a ff 00 0c 0a fe 02 17 01 00 00 01   ...2............
+0070  0a ff 00 0b 0a fe 02 17 01 00 00 01 0a fe 02 17   ................
+0080  ff ff ff ff 03 00 00 00 0a 64 17 fe 0a 64 17 fe   .........d...d..
+0090  02 00 00 01 00 0a 22 02 0a 64 17 fe 0a ff 00 17   ......"..d......
+00a0  80 00 70 7b 5c f9 00 24 ff ff ff 00 0a ff 00 17   ..p{\..$........
+00b0  0a fa 00 01 0a fc 1d 04                           ........

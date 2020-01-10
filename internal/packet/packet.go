@@ -16,7 +16,7 @@ type Packet struct {
 	Timestamp time.Time
 }
 
-// RunOffline fires up OSPF parsing
+// RunOffline fires up packet parsing
 func RunOffline(hostFile string, files ...string) {
 	for _, file := range files {
 		runOne(file)
@@ -38,6 +38,7 @@ func runOne(file string) error {
 	}
 	return nil
 }
+
 func handlePacket(p gopacket.Packet) error {
 
 	if p.Metadata().Truncated {

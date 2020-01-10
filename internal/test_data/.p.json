@@ -1,0 +1,38 @@
+{
+    "BaseLayer": {
+        "Contents": [],
+        "Payload": []
+    },
+    "OSPF": {
+        "Version": 2,
+        "Type": "Link State Update Packet",
+        "Length": 148,
+        "RouterID": 184297364,
+        "AreaID": 0,
+        "Checksum": 45030,
+        "Content": {
+            "NumOfLSAs": 1,
+            "LSAs": [
+                {
+                    "LSAheader": {
+                        "LSAge": 11,
+                        "LSType": 1,
+                        "LinkStateID": 184297234,
+                        "AdvRouter": 184297234,
+                        "LSSeqNumber": 2147599022,
+                        "LSChecksum": 20437,
+                        "Length": 120,
+                        "LSOptions": 2
+                    },
+                    "Content": {
+                        "Flags": 2,
+                        "Links": 8,
+                        "Routers": []
+                    }
+                }
+            ]
+        }
+    },
+    "AuType": 0,
+    "Authentication": 0
+}

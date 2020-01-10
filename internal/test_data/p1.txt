@@ -1,0 +1,140 @@
+No.     Time                          Source                Destination           Protocol Length Info
+      1 2022-08-19 00:51:25,346776    10.252.39.148         224.0.0.5             OSPF     184    LS Update
+
+Frame 1: 184 bytes on wire (1472 bits), 184 bytes captured (1472 bits)
+    Encapsulation type: Linux cooked-mode capture (25)
+    Arrival Time: Aug 19, 2022 00:51:25.346776000 MSK
+    [Time shift for this packet: 0.000000000 seconds]
+    Epoch Time: 1660859485.346776000 seconds
+    [Time delta from previous captured frame: 0.000000000 seconds]
+    [Time delta from previous displayed frame: 0.000000000 seconds]
+    [Time since reference or first frame: 0.000000000 seconds]
+    Frame Number: 1
+    Frame Length: 184 bytes (1472 bits)
+    Capture Length: 184 bytes (1472 bits)
+    [Frame is marked: False]
+    [Frame is ignored: False]
+    [Protocols in frame: sll:ethertype:ip:ospf]
+    [Coloring Rule Name: OSPF State Change]
+    [Coloring Rule String: ospf.msg != 1]
+Linux cooked capture
+    Packet type: Unicast to us (0)
+    Link-layer address type: 512
+    Link-layer address length: 0
+    Unused: 0000000000000000
+    Protocol: IPv4 (0x0800)
+Internet Protocol Version 4, Src: 10.252.39.148, Dst: 224.0.0.5
+    0100 .... = Version: 4
+    .... 0101 = Header Length: 20 bytes (5)
+    Differentiated Services Field: 0xc0 (DSCP: CS6, ECN: Not-ECT)
+        1100 00.. = Differentiated Services Codepoint: Class Selector 6 (48)
+        .... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+    Total Length: 168
+    Identification: 0xf70a (63242)
+    Flags: 0x0000
+        0... .... .... .... = Reserved bit: Not set
+        .0.. .... .... .... = Don't fragment: Not set
+        ..0. .... .... .... = More fragments: Not set
+        ...0 0000 0000 0000 = Fragment offset: 0
+    Time to live: 1
+    Protocol: OSPF IGP (89)
+    Header checksum: 0xae9d [validation disabled]
+    [Header checksum status: Unverified]
+    Source: 10.252.39.148
+    Destination: 224.0.0.5
+Open Shortest Path First
+    OSPF Header
+        Version: 2
+        Message Type: LS Update (4)
+        Packet Length: 148
+        Source OSPF Router: 10.252.39.148
+        Area ID: 0.0.0.0 (Backbone)
+        Checksum: 0xafe6 [correct]
+        Auth Type: Null (0)
+        Auth Data (none): 0000000000000000
+    LS Update Packet
+        Number of LSAs: 1
+        LSA-type 1 (Router-LSA), len 120
+            .000 0000 0000 1011 = LS Age (seconds): 11
+            0... .... .... .... = Do Not Age Flag: 0
+            Options: 0x02, (E) External Routing
+                0... .... = DN: Not set
+                .0.. .... = O: Not set
+                ..0. .... = (DC) Demand Circuits: Not supported
+                ...0 .... = (L) LLS Data block: Not Present
+                .... 0... = (N) NSSA: Not supported
+                .... .0.. = (MC) Multicast: Not capable
+                .... ..1. = (E) External Routing: Capable
+                .... ...0 = (MT) Multi-Topology Routing: No
+            LS Type: Router-LSA (1)
+            Link State ID: 10.252.39.18
+            Advertising Router: 10.252.39.18
+            Sequence Number: 0x8001c2ae
+            Checksum: 0x4fd5
+            Length: 120
+            Flags: 0x02, (E) AS boundary router
+                .... .0.. = (V) Virtual link endpoint: No
+                .... ..1. = (E) AS boundary router: Yes
+                .... ...0 = (B) Area border router: No
+            Number of Links: 8
+            Type: Stub     ID: 10.252.39.18    Data: 255.255.255.255 Metric: 10
+                Link ID: 10.252.39.18 - IP network/subnet number
+                Link Data: 255.255.255.255
+                Link Type: 3 - Connection to a stub network
+                Number of Metrics: 0 - TOS
+                0 Metric: 10
+            Type: Transit  ID: 10.100.6.254    Data: 10.100.6.100    Metric: 10
+                Link ID: 10.100.6.254 - IP address of Designated Router
+                Link Data: 10.100.6.100
+                Link Type: 2 - Connection to a transit network
+                Number of Metrics: 0 - TOS
+                0 Metric: 10
+            Type: PTP      ID: 10.252.35.1     Data: 10.252.39.18    Metric: 10
+                Link ID: 10.252.35.1 - Neighboring router's Router ID
+                Link Data: 10.252.39.18
+                Link Type: 1 - Point-to-point connection to another router
+                Number of Metrics: 0 - TOS
+                0 Metric: 10
+            Type: Stub     ID: 10.252.35.1     Data: 255.255.255.255 Metric: 10
+                Link ID: 10.252.35.1 - IP network/subnet number
+                Link Data: 255.255.255.255
+                Link Type: 3 - Connection to a stub network
+                Number of Metrics: 0 - TOS
+                0 Metric: 10
+            Type: PTP      ID: 10.252.39.1     Data: 10.252.39.18    Metric: 10
+                Link ID: 10.252.39.1 - Neighboring router's Router ID
+                Link Data: 10.252.39.18
+                Link Type: 1 - Point-to-point connection to another router
+                Number of Metrics: 0 - TOS
+                0 Metric: 10
+            Type: Stub     ID: 10.252.39.1     Data: 255.255.255.255 Metric: 10
+                Link ID: 10.252.39.1 - IP network/subnet number
+                Link Data: 255.255.255.255
+                Link Type: 3 - Connection to a stub network
+                Number of Metrics: 0 - TOS
+                0 Metric: 10
+            Type: PTP      ID: 10.252.39.17    Data: 10.252.39.18    Metric: 10
+                Link ID: 10.252.39.17 - Neighboring router's Router ID
+                Link Data: 10.252.39.18
+                Link Type: 1 - Point-to-point connection to another router
+                Number of Metrics: 0 - TOS
+                0 Metric: 10
+            Type: Stub     ID: 10.252.39.17    Data: 255.255.255.255 Metric: 10
+                Link ID: 10.252.39.17 - IP network/subnet number
+                Link Data: 255.255.255.255
+                Link Type: 3 - Connection to a stub network
+                Number of Metrics: 0 - TOS
+                0 Metric: 10
+
+0000  00 00 02 00 00 00 00 00 00 00 00 00 00 00 08 00   ................
+0010  45 c0 00 a8 f7 0a 00 00 01 59 ae 9d 0a fc 27 94   E........Y....'.
+0020  e0 00 00 05 02 04 00 94 0a fc 27 94 00 00 00 00   ..........'.....
+0030  af e6 00 00 00 00 00 00 00 00 00 00 00 00 00 01   ................
+0040  00 0b 02 01 0a fc 27 12 0a fc 27 12 80 01 c2 ae   ......'...'.....
+0050  4f d5 00 78 02 00 00 08 0a fc 27 12 ff ff ff ff   O..x......'.....
+0060  03 00 00 0a 0a 64 06 fe 0a 64 06 64 02 00 00 0a   .....d...d.d....
+0070  0a fc 23 01 0a fc 27 12 01 00 00 0a 0a fc 23 01   ..#...'.......#.
+0080  ff ff ff ff 03 00 00 0a 0a fc 27 01 0a fc 27 12   ..........'...'.
+0090  01 00 00 0a 0a fc 27 01 ff ff ff ff 03 00 00 0a   ......'.........
+00a0  0a fc 27 11 0a fc 27 12 01 00 00 0a 0a fc 27 11   ..'...'.......'.
+00b0  ff ff ff ff 03 00 00 0a                           ........
